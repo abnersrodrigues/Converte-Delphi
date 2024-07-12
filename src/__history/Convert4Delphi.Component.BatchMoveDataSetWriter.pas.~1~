@@ -1,0 +1,48 @@
+unit Convert4Delphi.Component.BatchMoveDataSetWriter;
+
+interface
+
+Uses
+  System.SysUtils, System.Classes, Convert4Delphi.Interfaces.Components,
+  FireDAC.Comp.BatchMove.DataSet, FireDAC.Comp.Client;
+
+Type
+
+  TBatchMoveDataSetReader = class(TInterfacedObject, iBatchMoveDataSetWriter)
+    private
+      FBatchMoveDataSetWriter: TFDBatchMoveDataSetWriter;
+    public
+      Constructor Create(AQuery: TFDQuery);
+      Destructor Destroy; Override;
+      class function New(AQuery: TFDQuery): iBatchMoveDataSetWriter;
+      function Component: TFDBatchMoveDataSetReader;
+  end;
+
+implementation
+
+{ TBatchMoveDataSetReader }
+
+function TBatchMoveDataSetReader.Component: TFDBatchMoveDataSetWriter;
+begin
+  Result := FBatchMoveDataSetWriter;
+end;
+
+Constructor TBatchMoveDataSetReader.Create(AQuery: TFDQuery);
+begin
+  FBatchMoveDataSetWriter := TFDBatchMoveDataSetReader.Create(nil);
+  FBatchMoveDataSetWriter.DataSet := AQuery;
+end;
+
+destructor TBatchMoveDataSetReader.Destroy;
+begin
+  FreeAndNil(FBatchMoveDataSetWriter);
+  inherited;
+end;
+
+class function TBatchMoveDataSetReader.New(AQuery: TFDQuery): iBatchMoveDataSetWriter;
+begin
+  Result := Self.Create(AQuery);
+end;
+
+end.
+

@@ -1,0 +1,25 @@
+unit Convert4Delphi.Interfaces.Components;
+
+interface
+
+uses
+  FireDAC.Comp.BatchMove.DataSet, FireDAC.Comp.BatchMove.Text,
+  FireDAC.Comp.BatchMove;
+
+Type
+
+  iBatchMove = interface
+    function Component: TFDBatchMove;
+  end;
+
+  iBatchMoveTextWriter = interface
+    function Component: TFDBatchMoveTextWriter;
+  end;
+
+  iBatchMoveDataSetReader = interface
+    function Component: TFDBatchMoveDataSetReader;
+  end;
+
+implementation
+
+end.

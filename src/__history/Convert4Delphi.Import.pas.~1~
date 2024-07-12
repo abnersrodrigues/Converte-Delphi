@@ -1,0 +1,40 @@
+unit Convert4Delphi.Import;
+
+interface
+
+Uses
+  System.SysUtils, System.Classes, Convert4Delphi.Interfaces;
+
+Type
+
+  TImport = class(TInterfacedObject, iImport)
+    private
+
+    public
+      Constructor Create;
+      Destructor Destroy; Override;
+      class function New: iImport;
+  end;
+
+implementation
+
+{ TImport }
+
+constructor TImport.Create;
+begin
+
+end;
+
+destructor TImport.Destroy;
+begin
+
+  inherited;
+end;
+
+class function TImport.New: iImport;
+begin
+  Result := Self.Create;
+end;
+
+end.
+

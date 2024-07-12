@@ -1,0 +1,17 @@
+unit Convert4Delphi.Interfaces;
+
+interface
+
+Type
+
+  iConvert = interface
+
+  end;
+
+  iImport = interface
+
+  end;
+
+implementation
+
+end.

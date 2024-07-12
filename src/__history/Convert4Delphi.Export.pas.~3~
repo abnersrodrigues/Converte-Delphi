@@ -1,0 +1,61 @@
+unit Convert4Delphi.Export;
+
+interface
+
+Uses
+  System.SysUtils, System.Classes, Convert4Delphi.Interfaces,
+  FireDAC.Comp.Client, Convert4Delphi.Interfaces.Components;
+
+Type
+
+  TExport = class(TInterfacedObject, iExport)
+    private
+      FBatchMove: iBatchMove;
+      FBatchMoveDataSetReader: iBatchMoveDataSetReader;
+      FBatchMoveTextWriter: iBatchMoveTextWriter;
+    public
+      Constructor Create(AQuery: TFDQuery; ADest: String);
+      Destructor Destroy; Override;
+      class function New(AQuery: TFDQuery; ADest: String): iExport;
+      function Executar: iExport;
+  end;
+
+implementation
+
+uses
+  Convert4Delphi.Component.BatchMoveTextWriter,
+  Convert4Delphi.Component.BatchMoveDataSetReader,
+  Convert4Delphi.Component.BatchMove;
+
+{ TExport }
+
+Constructor TExport.Create(AQuery: TFDQuery; ADest: String);
+begin
+  FBatchMove              := TBatchMove.New;
+
+  FBatchMoveDataSetReader := TBatchMoveDataSetReader.New(AQuery);
+
+  FBatchMoveTextWriter    := TBatchMoveTextWriter.New(ADest);
+end;
+
+destructor TExport.Destroy;
+begin
+
+  inherited;
+end;
+
+function TExport.Executar: iExport;
+begin
+  Result := Self;
+  TBatchMove(FBatchMove).Component.Reader := TBatchMoveDataSetReader(FBatchMoveDataSetReader).Component;
+  TBatchMove(FBatchMove).Component.Writer := TBatchMoveTextWriter(FBatchMoveTextWriter).Component;
+  TBatchMove(FBatchMove).Component.Execute;
+end;
+
+class function TExport.New(AQuery: TFDQuery; ADest: String): iExport;
+begin
+  Result := Self.Create(AQuery, ADest);
+end;
+
+end.
+

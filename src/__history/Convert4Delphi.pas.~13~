@@ -1,0 +1,52 @@
+unit Convert4Delphi;
+
+interface
+
+Uses
+  System.SysUtils, System.Classes, Data.DB, FireDAC.Comp.Client;
+
+Type
+
+  TConverter4Delphi = class
+    Private
+
+    Public
+      Constructor Create; Overload;
+      Destructor Destroy; Override;
+
+      class function Convert(AQuery: TFDQuery; ADest: String): TConverter4Delphi;
+      class function Import(AQuery: TFDQuery; AOrig: String):  TConverter4Delphi;
+  end;
+
+implementation
+
+uses
+  Convert4Delphi.Convert,
+  Convert4Delphi.Import;
+
+{ TConverter4Delphi }
+
+constructor TConverter4Delphi.Create;
+begin
+
+end;
+
+destructor TConverter4Delphi.Destroy;
+begin
+
+  inherited;
+end;
+
+class function TConverter4Delphi.Convert(AQuery: TFDQuery; ADest: String): TConverter4Delphi;
+begin
+  Result := Self.Create;
+  TConvert.New(AQuery, ADest).Executar;
+end;
+
+class function TConverter4Delphi.Import(AQuery: TFDQuery; AOrig: String): TConverter4Delphi;
+begin
+  Result := Self.Create;
+  TImport.New(AQuery, AOrig).Executar;
+end;
+
+end.

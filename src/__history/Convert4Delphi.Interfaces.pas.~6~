@@ -1,0 +1,20 @@
+unit Convert4Delphi.Interfaces;
+
+interface
+
+Uses
+  System.SysUtils, System.Classes;
+
+Type
+
+  iConvert = interface
+    function Executar: iConvert;
+  end;
+
+  iImport = interface
+    function Executar: iImport;
+  end;
+
+implementation
+
+end.

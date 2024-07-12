@@ -1,0 +1,13 @@
+unit Convert4Delphi.Interfaces.Components;
+
+interface
+
+Type
+
+  iBatchMoveTextWriter = interface
+
+  end;
+
+implementation
+
+end.

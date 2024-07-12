@@ -1,0 +1,48 @@
+unit Convert4Delphi.Component.GUIxWaitCursor;
+
+interface
+
+Uses
+  System.SysUtils, System.Classes, Convert4Delphi.Interfaces.Components,
+  FireDAC.Comp.UI;
+
+Type
+
+  TGUIxWaitCursor = class(TInterfacedObject, iGUIxWaitCursor)
+    private
+      FGUIxWaitCursor: TFDGUIxWaitCursor;
+    public
+      Constructor Create;
+      Destructor Destroy; Override;
+      class function New: iGUIxWaitCursor;
+      function Component: TFDBatchMoveDataSetWriter;
+  end;
+
+implementation
+
+{ TGUIxWaitCursor }
+
+function TGUIxWaitCursor.Component: TFDBatchMoveDataSetWriter;
+begin
+  Result := FBatchMoveDataSetWriter;
+end;
+
+Constructor TGUIxWaitCursor.Create(AQuery: TFDQuery);
+begin
+  FGUIxWaitCursor := TFDGUIxWaitCursor.Create(nil);
+  FBatchMoveDataSetWriter.DataSet := AQuery;
+end;
+
+destructor TGUIxWaitCursor.Destroy;
+begin
+  FreeAndNil(FBatchMoveDataSetWriter);
+  inherited;
+end;
+
+class function TGUIxWaitCursor.New(AQuery: TFDQuery): iGUIxWaitCursor;
+begin
+  Result := Self.Create(AQuery);
+end;
+
+end.
+

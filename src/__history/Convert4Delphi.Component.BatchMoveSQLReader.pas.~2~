@@ -1,0 +1,47 @@
+unit Convert4Delphi.Component.BatchMoveSQLReader;
+
+interface
+
+Uses
+  System.SysUtils, System.Classes, Convert4Delphi.Interfaces.Components,
+  FireDAC.Comp.BatchMove.SQL, FireDAC.Comp.Client;
+
+Type
+
+  TBatchMoveSQLReader = class(TInterfacedObject, iBatchMoveSQLReader)
+    private
+      FBatchMoveSQLReader: TFDBatchMoveSQLReader;
+    public
+      Constructor Create(AQuery: TFDQuery);
+      Destructor Destroy; Override;
+      class function New(AQuery: TFDQuery): iBatchMoveSQLReader;
+      function Component: TFDBatchMoveSQLReader;
+  end;
+
+implementation
+
+{ TBatchMoveSQLReader }
+
+function TBatchMoveSQLReader.Component: TFDBatchMoveSQLReader;
+begin
+  Result := FBatchMoveSQLReader;
+end;
+
+Constructor TBatchMoveSQLReader.Create(AQuery: TFDQuery);
+begin
+  FBatchMoveSQLReader := TFDBatchMoveSQLReader.Create(nil);
+end;
+
+destructor TBatchMoveSQLReader.Destroy;
+begin
+  FreeAndNil(FBatchMoveSQLReader);
+  inherited;
+end;
+
+class function TBatchMoveSQLReader.New(AQuery: TFDQuery): iBatchMoveSQLReader;
+begin
+  Result := Self.Create(AQuery);
+end;
+
+end.
+

@@ -1,0 +1,21 @@
+unit Convert4Delphi.Interfaces.Components;
+
+interface
+
+Type
+
+  iBatchMove = interface
+    function Component: TFDBatchMove;
+  end;
+
+  iBatchMoveTextWriter = interface
+
+  end;
+
+  iBatchMoveDataSetReader = interface
+    function Component: TFDBatchMoveDataSetReader;
+  end;
+
+implementation
+
+end.

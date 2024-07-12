@@ -1,0 +1,57 @@
+unit Convert4Delphi.Convert;
+
+interface
+
+Uses
+  System.SysUtils, System.Classes, Convert4Delphi.Interfaces,
+  FireDAC.Comp.Client, Convert4Delphi.Interfaces.Components, FireDAC.Comp.UI;
+
+Type
+
+  TConvert = class(TInterfacedObject, iConvert)
+    private
+      FBatchMove: iBatchMove;
+      FGUIxWaitCursor: iGUIxWaitCursor;
+    public
+      Constructor Create(AConexao: TFDConnection; ATableName: String);
+      Destructor Destroy; Override;
+      class function New(AConexao: TFDConnection; ATableName: String): iConvert;
+      function Executar: iConvert;
+  end;
+
+implementation
+
+uses
+  Convert4Delphi.Component.BatchMoveTextWriter,
+  Convert4Delphi.Component.BatchMoveDataSetReader,
+  Convert4Delphi.Component.BatchMove,
+  Convert4Delphi.Component.GUIxWaitCursor;
+
+{ TConvert }
+
+Constructor TConvert.Create(AConexao: TFDConnection; ATableName: String);
+begin
+  FBatchMove := TBatchMove.New;
+  FGUIxWaitCursor := TGUIxWaitCursor.New(AConexao);
+end;
+
+destructor TConvert.Destroy;
+begin
+
+  inherited;
+end;
+
+function TConvert.Executar: iConvert;
+begin
+  Result := Self;
+
+  TBatchMove(FBatchMove).Component.Execute;
+end;
+
+class function TConvert.New(AConexao: TFDConnection; ATableName: String): iConvert;
+begin
+  Result := Self.Create(AConexao, ATableName);
+end;
+
+end.
+

@@ -1,0 +1,46 @@
+unit Convert4Delphi.Component.BatchMoveTextWriter;
+
+interface
+
+Uses
+  System.SysUtils, System.Classes, Convert4Delphi.Interfaces.Components,
+  FireDAC.Comp.BatchMove.Text;
+
+Type
+
+  TBatchMoveTextWriter = class(TInterfacedObject, iBatchMoveTextWriter)
+    private
+      FDBatchMoveTextWriter: TFDBatchMoveTextWriter;
+    public
+      Constructor Create;
+      Destructor Destroy; Override;
+      class function New: iBatchMoveTextWriter;
+      function Component: TFDBatchMoveTextWriter;
+  end;
+
+implementation
+
+{ TBatchMoveTextWriter }
+
+function TBatchMoveTextWriter.Component: TFDBatchMoveTextWriter;
+begin
+  Result := FDBatchMoveTextWriter;
+end;
+
+constructor TBatchMoveTextWriter.Create;
+begin
+
+end;
+
+destructor TBatchMoveTextWriter.Destroy;
+begin
+  FreeAndNil(FDBatchMoveTextWriter);
+  inherited;
+end;
+
+class function TBatchMoveTextWriter.New: iBatchMoveTextWriter;
+begin
+  Result := Self.Create;
+end;
+
+end.

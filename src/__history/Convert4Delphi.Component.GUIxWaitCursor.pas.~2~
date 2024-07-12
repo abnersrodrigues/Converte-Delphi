@@ -1,0 +1,47 @@
+unit Convert4Delphi.Component.GUIxWaitCursor;
+
+interface
+
+Uses
+  System.SysUtils, System.Classes, Convert4Delphi.Interfaces.Components,
+  FireDAC.Comp.UI;
+
+Type
+
+  TGUIxWaitCursor = class(TInterfacedObject, iGUIxWaitCursor)
+    private
+      FGUIxWaitCursor: TFDGUIxWaitCursor;
+    public
+      Constructor Create;
+      Destructor Destroy; Override;
+      class function New: iGUIxWaitCursor;
+      function Component: TFDGUIxWaitCursor;
+  end;
+
+implementation
+
+{ TGUIxWaitCursor }
+
+function TGUIxWaitCursor.Component: TFDGUIxWaitCursor;
+begin
+  Result := FGUIxWaitCursor;
+end;
+
+Constructor TGUIxWaitCursor.Create;
+begin
+  FGUIxWaitCursor := TFDGUIxWaitCursor.Create(nil);
+end;
+
+destructor TGUIxWaitCursor.Destroy;
+begin
+  FreeAndNil(FGUIxWaitCursor);
+  inherited;
+end;
+
+class function TGUIxWaitCursor.New: iGUIxWaitCursor;
+begin
+  Result := Self.Create;
+end;
+
+end.
+

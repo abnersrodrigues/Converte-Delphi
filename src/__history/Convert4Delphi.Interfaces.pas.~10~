@@ -1,0 +1,30 @@
+unit Convert4Delphi.Interfaces;
+
+interface
+
+Uses
+  System.SysUtils, System.Classes, FireDAC.Comp.Client;
+
+Type
+
+  iConvert4Delphi = interface
+    function Exportar(AQuery: TFDQuery; ADest: String): iConvert4Delphi;
+    function Importar(AQuery: TFDQuery; AOrig: String):  iConvert4Delphi;
+    function TabelaTabela(AConexao: TFDConnection; ATableName: String): iConvert4Delphi;
+  end;
+
+  iConvert = interface
+    function Executar: iConvert;
+  end;
+
+  iExport = interface
+    function Executar: iExport;
+  end;
+
+  iImport = interface
+    function Executar: iImport;
+  end;
+
+implementation
+
+end.
